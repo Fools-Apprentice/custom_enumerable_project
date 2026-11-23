@@ -25,6 +25,13 @@ module Enumerable
     return selected
   end
 
+  def my_all?
+    my_each do |value|
+      return false unless yield(value)
+    end
+    return true
+  end
+
   def my_any?
     is_match = false
     my_each do |value|
