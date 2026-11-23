@@ -47,9 +47,44 @@ module Enumerable
         return false
       end
     end
-    
+
     return true
 
+  end
+
+  def my_count
+    total = 0
+    if !block_given?
+      my_each do |value|
+          total += 1
+      end
+      return total
+    end
+
+
+    my_each do |value|
+      yield(value) ? total += 1 : next
+    end
+    return total
+  end
+
+  def my_map
+    if !block_given?
+      return self.to_enum(:my_map)
+    end
+    mapped = []
+    my_each do |value|
+      mapped << yield(value)      
+    end
+    return mapped
+  end
+
+  def my_inject(initial)
+    accumulator = initial
+    my_each do |value|
+      accumulator = yield accumulator, value
+    end
+    return accumulator
   end
 end
 
