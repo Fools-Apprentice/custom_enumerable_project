@@ -39,6 +39,18 @@ module Enumerable
     end
     return is_match
   end
+
+  def my_none?
+
+    my_each do |value|
+      if yield(value)
+        return false
+      end
+    end
+    
+    return true
+
+  end
 end
 
 # You will first have to define my_each
