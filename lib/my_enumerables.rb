@@ -24,6 +24,14 @@ module Enumerable
     end
     return selected
   end
+
+  def my_any?
+    is_match = false
+    my_each do |value|
+      yield(value) ? is_match = true : next
+    end
+    return is_match
+  end
 end
 
 # You will first have to define my_each
